@@ -1,0 +1,74 @@
+import random
+import sys
+
+
+# lets set some variables
+wordList = [
+"lion", "umbrella", "window", "computer", "glass", "juice", "chair", "desktop",
+ "laptop", "dog", "cat", "lemon", "cabel", "mirror", "hat", "happy"
+           ]
+
+guess_word = []
+guessing_word = random.choice(wordList) # lets randomize single word from the list
+length_word = len(guessing_word)
+letter_storage = []
+
+
+
+def beginning():
+  print("Please enter your word to be added to the list of words: ")
+  word = input(" ")
+  wordList.append(word)
+
+beginning()
+
+
+def change():
+
+    for character in guessing_word: 
+        guess_word.append("-")
+
+    print("The word has ", length_word, "characters")
+
+    print("Be aware that You can enter only 1 letter from a-z")
+
+    print(guess_word)
+
+
+
+def guessing():
+    guess_taken = 1
+
+    while guess_taken < 10:
+
+
+        guess = input("Pick a letter").lower()
+        print("Number of guesses taken: ", guess_taken)
+        print("You only have 10 tries")
+
+        if guess in letter_storage:
+            print("You have already guessed that letter!")
+        else: 
+
+            letter_storage.append(guess)
+            if guess in guessing_word:
+                print("You guessed correctly!")
+                for x in range(0, length_word): 
+                    if guessing_word[x] == guess:
+                        guess_word[x] = guess
+                        print(guess_word)
+
+                if not '-' in guess_word:
+                    print("CONGRATS, YOU WON!")
+                    break
+            else:
+                print("The letter is not in the word. Try Again!")
+                guess_taken += 1
+                if guess_taken == 10:
+                    print(" Dang you lost, maybe next time you will be able to guess the word. By the way the word you were guessing was: ",         guessing_word)
+
+
+change()
+guessing()
+
+print("Game Over!")
