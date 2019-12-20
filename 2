@@ -1,0 +1,114 @@
+#lottery
+import random
+
+usernum=[]
+drawnum=[]
+
+def menu():
+    print("")
+    print("1. Choose numbers ")
+    print("2. Lucky Dip")
+    print("3. Run Draw")
+    print("4. Run Simulation")
+    print("5. Exit")
+
+    try:
+        item = int(input("Pick your Item: "))
+    except ValueError:
+        print("Please enter a number 1 to 5.")
+        return 0
+
+    return item
+
+def choose():
+  print("1. Choose numbers")
+  numone = int(input("pick a number: "))
+  usernum.append(numone)
+  numtwo = int(input("pick a number: "))
+  usernum.append(numtwo)
+  numthree = int(input("pick a number: "))
+  usernum.append(numthree)
+  numfour = int(input("pick a number: "))
+  usernum.append(numfour)
+  numfive = int(input("pick a number: "))
+  usernum.append(numfive)
+  numsix = int(input("pick a number: "))
+  usernum.append(numsix)
+  print(usernum)
+  usernum.sort()
+  return 0
+
+def dip():
+  print("2. Lucky dip")
+  one = random.sample(range(1,50,1))
+  usernum.apend(one)
+  two = random.sample(range(1,50,1))
+  usernum.append(two)
+  three = random.sample(range(1,50,1))
+  usernum.append(three)
+  four = random.sample(range(1,50,1))
+  usernum.append(four)
+  five = random.sample(range(1,50,1))
+  usernum.append(five)
+  six = random.sample(range(1,50,1))
+  usernum.append(six)
+  print(usernum)
+  usernum.sort()
+  return 0
+
+def draw():
+  print("3. Run Draw")
+  oone = random.sample(range(1,50,1))
+  drawnum.append(oone)
+  ttwo = random.sample(range(1,50,1))
+  drawnum.append(ttwo)
+  tthree = random.sample(range(1,50,1))
+  drawnum.append(tthree)
+  ffour = random.sample(range(1,50,1))
+  drawnum.append(ffour)
+  ffive = random.sample(range(1,50,1))
+  drawnum.append(ffive)
+  ssix = random.sample(range(1,50,1))
+  drawnum.append(ssix)
+  bonus = random.sample(range(1,50,1))
+  print(usernum)
+  print(drawnum)
+  matches = set(drawnum) & set(usernum)
+  print("Number of matches:", len(matches))
+  if len(matches) > 0:
+      print(matches)
+  switch={0: "Not A winner", 1:"Not A winner", 2: "Not A Winner", 3: "Won $10", 4:"Won $70", 5:"Won $1000", 6:"Won $3000000"}
+  if len(matches) == 5 and (bonus in usernum):
+      print("won $100000")
+  else:
+      print(switch[len(matches)])
+  return len(matches)
+
+
+
+def simulation():
+  count = 0
+  money = 0
+  print("4) Run Simulation")
+    
+  num_of_matches = int(input("Number of matched numbers: "))
+
+  while draw() < num_of_matches:
+      count +=1
+      money +=1
+    
+  print ("You spent $",money)
+  print ("You played ",count, "draws")
+  print ("It took ", count, "weeks")
+  print ("And ", count/52, "years")
+
+
+def exit():
+  print("5. Exit")
+  exit()
+
+mn = menu()
+while mn != 5:
+    switch={0:menu, 1:choose, 2:dip, 3:draw, 4:simulation, 5: exit}
+    switch[mn]()
+    mn = menu()
